@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button, ProgressBar } from '../components/UI';
 import { ChevronLeft, CheckCircle2, XCircle, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
