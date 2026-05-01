@@ -10,6 +10,37 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
   const [fillValue, setFillValue] = useState('');
   const [feedback, setFeedback] = useState(null); // 'correct' | 'wrong'
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  // Timer Logic
+  const getTimeLimit = (level) => {
+    if (level <= 3) return 30;
+    if (level <= 6) return 45;
+    return 60;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(getTimeLimit(user.level));
+  const totalTime = getTimeLimit(user.level);
+
+  useEffect(() => {
+    if (feedback || isTransitioning) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleTimeout();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [feedback, isTransitioning]);
+
+  const handleTimeout = () => {
+    checkAnswer("WAKTU_HABIS_SALAH_TOTAL");
+  };
 
   const handleChoice = (option) => {
     if (feedback) return;
@@ -70,6 +101,23 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
       </header>
 
       <main className="flex-1 max-w-2xl w-full mx-auto flex flex-col justify-center">
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">Waktu Tersisa</span>
+            <span className={`text-lg font-black ${timeLeft <= 5 ? 'text-red-500 animate-pulse' : 'text-indigo-600'}`}>
+              {timeLeft}s
+            </span>
+          </div>
+          <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden">
+            <motion.div 
+              className={`h-full ${timeLeft <= 5 ? 'bg-red-500' : 'bg-indigo-500'}`}
+              initial={{ width: '100%' }}
+              animate={{ width: `${(timeLeft / totalTime) * 100}%` }}
+              transition={{ duration: 1, ease: "linear" }}
+            />
+          </div>
+        </div>
+
         <AnimatePresence mode="wait">
           {!isTransitioning && (
             <motion.div
