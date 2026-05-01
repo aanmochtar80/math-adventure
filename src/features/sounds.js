@@ -5,7 +5,10 @@
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-export const playCorrectSound = () => {
+export const playCorrectSound = async () => {
+  if (audioCtx.state === 'suspended') {
+    await audioCtx.resume();
+  }
   const oscillator = audioCtx.createOscillator();
   const gainNode = audioCtx.createGain();
 
@@ -24,7 +27,10 @@ export const playCorrectSound = () => {
   oscillator.stop(audioCtx.currentTime + 0.3);
 };
 
-export const playWrongSound = () => {
+export const playWrongSound = async () => {
+  if (audioCtx.state === 'suspended') {
+    await audioCtx.resume();
+  }
   const oscillator = audioCtx.createOscillator();
   const gainNode = audioCtx.createGain();
 
@@ -43,7 +49,10 @@ export const playWrongSound = () => {
   oscillator.stop(audioCtx.currentTime + 0.4);
 };
 
-export const playLevelUpSound = () => {
+export const playLevelUpSound = async () => {
+  if (audioCtx.state === 'suspended') {
+    await audioCtx.resume();
+  }
   const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
   notes.forEach((freq, index) => {
     const oscillator = audioCtx.createOscillator();
