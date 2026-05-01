@@ -28,7 +28,13 @@ function App() {
   };
 
   const handleAnswer = (isCorrect, category) => {
-    submitAnswer(isCorrect, category);
+    const result = submitAnswer(isCorrect, category);
+    
+    if (result && result.levelUp) {
+      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3');
+      audio.play().catch(e => console.log('Audio play blocked'));
+    }
+    
     nextQuestion();
   };
 

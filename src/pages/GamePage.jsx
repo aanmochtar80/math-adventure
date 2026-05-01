@@ -25,7 +25,11 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
   const checkAnswer = (answer) => {
     const isCorrect = answer.toString().trim().toLowerCase() === question.answer.toLowerCase();
     
+    // Sound Effects
     if (isCorrect) {
+      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3');
+      audio.play().catch(e => console.log('Audio play blocked'));
+      
       setFeedback('correct');
       confetti({
         particleCount: 100,
@@ -34,6 +38,8 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
         colors: ['#10b981', '#3b82f6', '#f59e0b']
       });
     } else {
+      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/251/251-preview.mp3');
+      audio.play().catch(e => console.log('Audio play blocked'));
       setFeedback('wrong');
     }
 
@@ -108,8 +114,10 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
                     <input
                       type="text"
                       autoFocus
+                      inputMode="numeric"
+                      pattern="[0-9]*"
                       value={fillValue}
-                      onChange={(e) => setFillValue(e.target.value)}
+                      onChange={(e) => setFillValue(e.target.value.replace(/[^0-9.-]/g, ''))}
                       disabled={!!feedback}
                       placeholder="Ketik jawabanmu..."
                       className="w-full p-8 text-center text-4xl font-black text-slate-800 bg-slate-50 border-4 border-slate-100 rounded-3xl focus:border-indigo-500 focus:outline-none transition-all"
