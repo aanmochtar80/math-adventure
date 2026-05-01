@@ -4,6 +4,7 @@ import { Dashboard } from './pages/Dashboard';
 import { GamePage } from './pages/GamePage';
 import { ParentDashboard } from './pages/ParentDashboard';
 import { useGame } from './hooks/useGame';
+import { playLevelUpSound } from './features/sounds';
 
 function App() {
   const { 
@@ -31,9 +32,7 @@ function App() {
     const result = submitAnswer(isCorrect, category);
     
     if (result && result.levelUp) {
-      const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
-      audio.volume = 1.0;
-      audio.play().catch(e => console.log('Audio play blocked'));
+      playLevelUpSound();
     }
     
     nextQuestion();
