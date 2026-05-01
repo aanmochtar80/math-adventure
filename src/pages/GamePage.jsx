@@ -27,7 +27,8 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
     
     // Sound Effects
     if (isCorrect) {
-      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3');
+      const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-37a.mp3');
+      audio.volume = 1.0;
       audio.play().catch(e => console.log('Audio play blocked'));
       
       setFeedback('correct');
@@ -38,7 +39,8 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
         colors: ['#10b981', '#3b82f6', '#f59e0b']
       });
     } else {
-      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/251/251-preview.mp3');
+      const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-10.mp3');
+      audio.volume = 1.0;
       audio.play().catch(e => console.log('Audio play blocked'));
       setFeedback('wrong');
     }

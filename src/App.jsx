@@ -31,7 +31,8 @@ function App() {
     const result = submitAnswer(isCorrect, category);
     
     if (result && result.levelUp) {
-      const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3');
+      const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
+      audio.volume = 1.0;
       audio.play().catch(e => console.log('Audio play blocked'));
     }
     
