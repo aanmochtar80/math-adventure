@@ -21,8 +21,12 @@ export const LoginPage = ({ onLogin }) => {
         className="w-full max-w-md"
       >
         <Card className="text-center">
-          <div className="inline-flex p-4 bg-indigo-100 rounded-2xl mb-6">
-            <Rocket className="w-10 h-10 text-indigo-600" />
+          <div className="inline-flex mb-6">
+            <img 
+              src="https://cdn-icons-png.flaticon.com/512/3413/3413535.png" 
+              alt="Logo" 
+              className="w-24 h-24 drop-shadow-lg"
+            />
           </div>
           <h1 className="text-3xl font-black text-slate-800 mb-2">Math Adventure</h1>
           <p className="text-slate-500 mb-8">Siap untuk petualangan matematika seru?</p>

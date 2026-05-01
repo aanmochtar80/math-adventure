@@ -12,8 +12,12 @@ export const Dashboard = ({ user, onStartGame, onOpenParent, onLogout }) => {
       <div className="max-w-5xl mx-auto">
         <header className="flex justify-between items-center mb-12">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center text-white shadow-lg">
-              <User size={32} />
+            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg border-2 border-indigo-50">
+              <img 
+                src="https://cdn-icons-png.flaticon.com/512/3413/3413535.png" 
+                alt="Logo" 
+                className="w-12 h-12"
+              />
             </div>
             <div>
               <h2 className="text-2xl font-black text-slate-800">Halo, {user.name}! 👋</h2>
