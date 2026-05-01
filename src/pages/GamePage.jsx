@@ -21,6 +21,11 @@ export const GamePage = ({ question, user, onAnswer, onBack, streak }) => {
   const [timeLeft, setTimeLeft] = useState(getTimeLimit(user.level));
   const totalTime = getTimeLimit(user.level);
 
+  // Reset timer when question changes
+  useEffect(() => {
+    setTimeLeft(getTimeLimit(user.level));
+  }, [question]);
+
   useEffect(() => {
     if (feedback || isTransitioning) return;
 
